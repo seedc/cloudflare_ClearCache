@@ -7,7 +7,7 @@ WORKDIR /app
 COPY . .
 
 RUN apk update \
-    && apk add --no-cache git curl
+    && apk add --no-cache git curl && chmod +x del.sh
 
 ARG GIT_TOKEN
 ENV GIT_TOKEN=${GIT_TOKEN}
