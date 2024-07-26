@@ -5,7 +5,9 @@ import (
 	"encoding/json"
 	"fmt"
 	"net/http"
+	"net/url"
 	"os"
+	"strings"
 )
 
 type CloudflareResponse struct {
@@ -24,10 +26,42 @@ type Error struct {
 	Message string `json:"message"`
 }
 
+// removeWWWPrefix 移除域名前的 'www.' 前缀
+func removeWWWPrefix(domain string) string {
+	if strings.HasPrefix(domain, "www.") {
+		return strings.TrimPrefix(domain, "www.")
+	}
+	return domain
+}
+
+// getMainDomain 获取主域名
+func getMainDomain(domain string) string {
+	parsedURL, err := url.Parse(domain)
+	if err != nil || parsedURL.Hostname() == "" {
+		// 如果无法解析为 URL 或者没有主机名部分，直接返回输入的域名
+		return domain
+	}
+
+	// 获取主机名部分
+	hostname := parsedURL.Hostname()
+
+	// 分割主机名部分
+	parts := strings.Split(hostname, ".")
+	if len(parts) > 2 {
+		// 如果分割后的部分大于2，则取最后两个部分作为主域名
+		return strings.Join(parts[len(parts)-2:], ".")
+	}
+	return hostname
+}
+
 func Getzid(domain string) (zoneID string) {
 	// 替换为你的API信息
 	apiEmail := settings.Conf.Email
 	apiKey := settings.Conf.Token
+
+	// 清洗 URL，获取主域名
+	domain = getMainDomain(removeWWWPrefix(domain))
+	fmt.Println(domain)
 
 	url := fmt.Sprintf("https://api.cloudflare.com/client/v4/zones?name=%s", domain)
 

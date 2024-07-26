@@ -1,11 +1,11 @@
 app:
   name: "cloudflare_ClearCache"
   mode: "dev"
-  port: 8008
+  port: 8000
   version: "v0.0.1"
 auth:
-  token: "Cf API key"                        #token
-  email: "Cf email"
+  token: "xxxxxxxx"                        #token
+  email: "xxx@xxx.me"
 log:
   level: "debug"                        # 日记等级
   filename: "cloudflare_ClearCache.log"                 # 日记路径及日记文件名
@@ -13,7 +13,11 @@ log:
   max_age: 30                           # 保留30天
   max_backups: 7                        # 多少天备份一次 这里是7天
 bossjob:
-  domain: ["bossjob.com", "bossjob.ai", "bossjob.co", "bossjob.ph", "bossjob.com.tr", "bossjob.id", "bossjob.jp", "bossjob.my", "bossjob.sg", "bossjob.tw"]
+  domain: ["xxxx.com", "xxxx.ai", "xxxxx.co", "xxxx.ph", "xxxx.com.tr", "xxxx.id", "xxxxx.jp", "xxxxx.my", "xxxxx.sg", "xxxxx.tw"]
+aws:
+  awsAccessKeyID: xxx
+  awsSecretAccessKey: xxxxxxx
+  awsRegion: xxxxx
 #mysql:
 #  host: "192.168.5.100"                 # mysql 数据库地址
 #  port: 3306                            # mysql 数据库端口

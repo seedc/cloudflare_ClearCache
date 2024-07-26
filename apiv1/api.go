@@ -39,6 +39,8 @@ func DomainPost(c *gin.Context) {
 		}
 		c.JSON(http.StatusOK, gin.H{"domain": domain})
 		fmt.Println("清理所有缓存", alldomain)
+	case "yolotechnology.com":
+		zoneid.CloudFrontid(domain)
 	default:
 		c.JSON(http.StatusOK, gin.H{"domain": domain})
 

@@ -20,10 +20,17 @@ type AppConfig struct {
 	*MySQLConfig `mapstructure:"mysql"`
 	*Mytoken     `mapstructure:"auth"`
 	*Bossjob     `mapstructure:"bossjob"`
+	*Aws         `mapstructure:"aws"`
 }
 
 type Bossjob struct {
 	Domain []string `mapstructure:"domain"`
+}
+
+type Aws struct {
+	AwsAccessKeyID     string `mapstructure:"awsAccessKeyID"`
+	AwsSecretAccessKey string `mapstructure:"awsSecretAccessKey"`
+	AwsRegion          string `mapstructure:"awsRegion"`
 }
 
 type Mytoken struct {
